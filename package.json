@@ -1,0 +1,29 @@
+{
+  "name": "company-registry-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bgabor91/company-registry-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bgabor91/company-registry-app/issues"
+  },
+  "homepage": "https://github.com/bgabor91/company-registry-app#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "knex": "^0.21.5-next2",
+    "sqlite3": "^5.0.0"
+  }
+}
