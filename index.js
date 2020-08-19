@@ -1,22 +1,20 @@
 const express = require('express');
 const Companies = require('./models/dbHelper');
 const CompanyForms = require('./models/dbHelper');
+const Locations = require('./models/dbHelper');
 
 const server = express();
 
-server.use(express.json());
+server.use(express.json({ extended: false }));
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
-server.get('/', (req, res) => {
-    res.json({ message: "I am server" });
-});
+server.get('/', (req, res) => res.send("I am your server"));
 
 server.post('/api/companies', (req, res) => {
     Companies.add(req.body)
         .then(company => {
-            console.log(company)
-            res.status(200).json(company);
+        return res.status(200).send(company);
         })
         .catch(err => {
             res.status(500).json({ message: 'Cannot add company' });
@@ -26,7 +24,7 @@ server.post('/api/companies', (req, res) => {
 server.get('/api/companies', (req, res) => {
     Companies.find(req.body)
         .then(company => {
-            res.status(200).json(company);
+            res.status(200).send(company);
         })
         .catch(err => {
             res.status(500).json({ message: 'Cannot find companies' });
@@ -82,35 +80,77 @@ server.patch('/api/companies/:id', (req, res) => {
         });
 });
 
-server.post('/api/companies/:id/company_form', (req, res) => {
-    const { id } = req.params;
-    const companyForm = req.body;
-    //const company = Companies.findById(id);
-    //let formId = null;
-    
+server.post('/api/company_forms', (req, res) => {
     CompanyForms.addCompanyForm(req.body)
-        .then(company_form => {
-            res.status(200).json(company_form);
+        .then(form => {
+            res.status(200).json(form);
         })
         .catch(err => {
             res.status(500).json({ message: 'Cannot add company form' });
         });
-    
-    Companies.findById(id)
-        .then(company => {
-            if (!company) {
-                res.status(404).json({ message: 'Invalid id' });
-            } 
-        })
-        .catch(err => {
-            res.status(500).json({ message: 'Error finding company' });
-        });
-
-    // if (!company.company_form_id) {
-    //     company['company_form_id'] = parseInt(formId, 10);
-    // }
 });
 
+server.get('/api/company_forms', (req, res) => {
+    CompanyForms.findCompanyForm(req.body)
+        .then(form => {
+            res.status(200).json(form);
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Cannot find companies' });
+        });
+});
+
+server.get('/api/company_forms/:id', (req, res) => {
+    const { id } = req.params;
+
+    CompanyForms.findCompanyFormById(id)
+        .then(form => {
+            if (form) {
+                res.status(200).json(form);
+            } else {
+                res.status(404).json({ message: 'Record not found' });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Cannot find company form' });
+        });
+});
+
+server.post('/api/locations', (req, res) => {
+    Locations.addLocation(req.body)
+        .then(location => {
+            res.status(200).json(location);
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Cannot add company form' });
+        });
+});
+
+server.get('/api/locations', (req, res) => {
+    Locations.findLocation(req.body)
+        .then(location => {
+            res.status(200).json(location);
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Cannot find companies' });
+        });
+});
+
+server.get('/api/locations/:id', (req, res) => {
+    const { id } = req.params;
+
+    Locations.findLocationById(id)
+        .then(location => {
+            if (location) {
+                res.status(200).json(location);
+            } else {
+                res.status(404).json({ message: 'Record not found' });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Cannot find company form' });
+        });
+});
 
 server.listen(PORT, () => {
     console.log(`\n *** Server running on port ${PORT} *** \n`);

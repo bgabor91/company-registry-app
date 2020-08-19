@@ -2,21 +2,9 @@ const knex = require('knex');
 const config = require('../knexfile');
 const db = knex(config.development);
 
-async function add(company, company_form_id, location_id) {
-    const { id } = await db('companies').insert(company);
-    return id;
-}
-
-function findByCompanyFormId(id) {
-    return db('company_forms')
-        .where({ id })
-        .first();
-}
-
-function findByLocationId(id) {
-    return db('locations')
-        .where({ id })
-        .first();
+// companies queries
+async function add(company) {
+    return await db('companies').insert(company);
 }
 
 function find() {
@@ -44,17 +32,37 @@ function update(id, changes) {
         });
 }
 
-function findCompanyFormById(id) {
-
-}
+// company_forms queries
 
 async function addCompanyForm(newForm) {
     const { id } = await db('company_forms').insert(newForm);
     return id;
 }
 
-function updateCompanyForm(id, company_id) {
+function findCompanyForm() {
+    return db('company_forms');
+}
 
+function findCompanyFormById(id) {
+    return db('company_forms')
+        .where({ id })
+        .first();
+}
+
+//locations queries
+
+async function addLocation(newLocation) {
+    return await db('locations').insert(newLocation);
+}
+
+function findLocation() {
+    return db('locations');
+}
+
+function findLocationById(id) {
+    return db('locations')
+        .where({ id })
+        .first();
 }
 
 module.exports = {
@@ -64,5 +72,9 @@ module.exports = {
     remove,
     update,
     addCompanyForm,
-    updateCompanyForm
+    findCompanyForm,
+    findCompanyFormById,
+    addLocation,
+    findLocation,
+    findLocationById
 };
