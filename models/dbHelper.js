@@ -4,6 +4,7 @@ const db = knex(config.development);
 
 // companies queries
 async function add(company) {
+    console.log(company);
     return await db('companies').insert(company);
 }
 

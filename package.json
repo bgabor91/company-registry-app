@@ -1,29 +1,40 @@
 {
-  "name": "company-registry-app",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "server": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bgabor91/company-registry-app.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bgabor91/company-registry-app/issues"
-  },
-  "homepage": "https://github.com/bgabor91/company-registry-app#readme",
-  "devDependencies": {
-    "nodemon": "^2.0.4"
-  },
-  "dependencies": {
-    "express": "^4.17.1",
-    "knex": "^0.21.5-next2",
-    "sqlite3": "^5.0.0"
-  }
+	"name": "company-registry-app",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"server": "nodemon index.js",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"client": "npm start --prefix client",
+		"dev": "concurrently \"yarn server\" \"npm run client\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bgabor91/company-registry-app.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/bgabor91/company-registry-app/issues"
+	},
+	"homepage": "https://github.com/bgabor91/company-registry-app#readme",
+	"devDependencies": {
+		"nodemon": "^2.0.4"
+	},
+	"dependencies": {
+		"@material-ui/core": "^4.11.0",
+		"@material-ui/icons": "^4.9.1",
+		"body-parser": "^1.19.0",
+		"concurrently": "^5.3.0",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"knex": "^0.21.5-next2",
+		"prop-types": "^15.7.2",
+		"react-redux": "^7.2.1",
+		"redux": "^4.0.5",
+		"sqlite3": "^5.0.0"
+	}
 }
