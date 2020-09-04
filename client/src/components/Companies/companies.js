@@ -40,7 +40,7 @@ class Companies extends Component {
                     size="medium"
                     color="primary"
                     onClick={() => { alert('Later') }}
-                    className='btn'>
+                    className='btn--addNew'>
                     Add new Company
                 </Button>
                 <TableContainer component={Paper}>
@@ -73,10 +73,14 @@ class Companies extends Component {
                                     <TableCell>{company.location_id}</TableCell>
                                     <TableCell>{company.comment}</TableCell>
                                     <TableCell>
-                                        <DeleteIcon />
+                                    <div role="button" className="edit-button">
+                                    <EditIcon />
+                                    </div>
                                     </TableCell>
                                     <TableCell>
-                                        <EditIcon />
+                                        <div role="button" className="delete-button">
+                                            <DeleteIcon />
+                                        </div>
                                     </TableCell>
                                 </TableRow>
                             ))}
